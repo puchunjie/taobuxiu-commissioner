@@ -1,0 +1,45 @@
+<template>
+    <div class="header">
+        <a class="back">返回</a>
+        <slot></slot>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: {
+            backText: {
+                type: String,
+                default: '返回'
+            }
+        },
+        methods: {
+            goBack(){
+                
+            }
+        }
+    }
+</script>
+
+
+<style lang="less" scoped>
+    @import '../../style/mixin.less';
+    .header {
+        position: fixed;
+        width: 100%;
+        height: .4rem;
+        line-height: .4rem;
+        left: 0;
+        top: 0;
+        background-color: #fff;
+        font-size: .17rem;
+        text-align: center;
+        border-bottom: 1px solid @line_light_gray;
+        .back {
+            position: absolute;
+            font-size: .12rem;
+            left: .1rem;
+        }
+    }
+</style>
+

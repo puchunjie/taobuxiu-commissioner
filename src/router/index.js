@@ -13,13 +13,14 @@ Vue.use(Router);
 const router = new Router({
         mode: routerMode,
         base: '/zy/',
+        redirect: '/businessList',
         routes: [{
-                path: '/',
-                component: resolve => require(['@/views/main.vue'], resolve)
+                path: '/businessList',
+                component: resolve => require(['@/views/businessList/index.vue'], resolve)
             },
             {
-                path: '/test',
-                component: resolve => require(['@/views/test.vue'], resolve)
+                path: '/buys',
+                component: resolve => require(['@/views/buys/index.vue'], resolve)
             },
             {
                 path: '*',

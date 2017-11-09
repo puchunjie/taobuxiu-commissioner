@@ -1,3 +1,20 @@
 <template>
-  <div>i am test</div>
+  <div>
+    模板
+  </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      
+    }
+  }
+}
+</script>
+<style>
+.hello{
+  font-size: .14rem;
+}
+</style>
