@@ -19,6 +19,10 @@ const router = new Router({
                 component: resolve => require(['@/views/businessList/index.vue'], resolve)
             },
             {
+                path: '/businessDetail',
+                component: resolve => require(['@/views/businessDetail/index.vue'], resolve)
+            },
+            {
                 path: '/buys',
                 component: resolve => require(['@/views/buys/index.vue'], resolve)
             },
