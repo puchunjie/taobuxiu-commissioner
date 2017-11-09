@@ -5,12 +5,15 @@ import axios from './utils/http'
 import './utils/rem'
 import * as filters from './filters/index' //过滤器
 import FastClick from 'fastclick'
+import VueScroller from 'vue-scroller'
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body);
     }, false);
 }
-//批量注册过滤器
+// 无限滚动插件
+Vue.use(VueScroller)
+    //批量注册过滤器
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
