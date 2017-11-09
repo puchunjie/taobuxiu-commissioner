@@ -13,8 +13,3 @@ export default {
   }
 }
 </script>
-<style>
-.hello{
-  font-size: 1rem;
-}
-</style>

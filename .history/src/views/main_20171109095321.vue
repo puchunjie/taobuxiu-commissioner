@@ -15,6 +15,6 @@ export default {
 </script>
 <style>
 .hello{
-  font-size: 1rem;
+  font-size: 10rem;
 }
 </style>
