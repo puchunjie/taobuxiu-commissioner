@@ -19,6 +19,11 @@
 
 <style lang="less">
   @import './style/common.less';
+
+  #app{
+    height: 100%;
+  }
+
   .router-fade-enter-active,
   .router-fade-leave-active {
     transition: opacity .3s;

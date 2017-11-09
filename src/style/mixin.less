@@ -1,22 +1,30 @@
 @base_blue:#116CD6;
 @line_dark_gray:#ABABAB; 
 @line_light_gray:#DDD;
+@background_gray: #F5F5F5;
 
 // 状态颜色
 @status_green:#439912;
 @status_red:#FF5555;
-
+// autofix
 .opacity(@factor) {
     @iefactor: @factor*100;
     filter: ~"alpha(opacity=@{iefactor})";
     opacity: @factor;
 }
 
-// autofix
+
 .borderRadius(@radius:.05rem) { 
     -moz-border-radius: @radius; 
     -webkit-border-radius: @radius; 
     border-radius: @radius; 
+}
+
+.transition(@attribute:all,@time:.2s){
+    transition: @attribute @time;
+    -moz-transition: @attribute @time; /* Firefox 4 */
+    -webkit-transition: @attribute @time; /* Safari 和 Chrome */
+    -o-transition: @attribute @time;
 }
 
 .ellipsis(){
