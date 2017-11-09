@@ -1,19 +1,22 @@
 <template>
-    <div class="search" :class="isFocus?'on-focus':''">
-        <div class="search-main">
-            <div class="search-warp">
-                <input class="goast-input" v-model="searchText" @blur="lazyHide" @focus="isFocus = !isFocus" type="text" placeholder="请输入公司名/手机号">
+    <div class="search-container">
+        <div class="search" :class="isFocus?'on-focus':''">
+            <div class="search-main">
+                <div class="search-warp">
+                    <input class="goast-input" v-model="searchText" @blur="lazyHide" @focus="isFocus = true" type="text" placeholder="请输入公司名/手机号">
+                </div>
+                <a class="clear-text" @click="clear">取消</a>
             </div>
-            <a class="clear-text" @click="clear">取消</a>
-        </div>
-        <div class="search-history">
-            <h3>最近搜索</h3>
-            <div class="history-list">
-                <div class="item" @click="fillText">
-                    <span class="iconfont icon-shizhong"></span> 搜索内容
+            <div class="search-history">
+                <h3>最近搜索</h3>
+                <div class="history-list">
+                    <div class="item" @click="fillText">
+                        <span class="iconfont icon-shizhong"></span> 搜索内容
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="goast-search" v-show="isFocus"></div>
     </div>
 </template>
 
@@ -39,7 +42,7 @@
                         this.isFocus = false
                 }, 500);
             },
-            fillText(e){
+            fillText(e) {
                 this.searchText = txt ? txt : 'hahhaha';
             }
         },
@@ -62,6 +65,11 @@
 
 <style lang="less" scoped>
     @import '../../style/mixin.less';
+    .goast-search {
+        width: 100%;
+        height: .46rem;
+    }
+    
     .search {
         width: 100%;
         .transition;
@@ -70,16 +78,15 @@
             height: 100%;
             top: 0;
             left: 0;
+            z-index: 999;
             background-color: rgba(0,0,0,.3);
             .search-warp {
                 width: 90%;
-                z-index: 999;
             }
             .clear-text {
                 right: 0!important;
             }
-
-            .search-history{
+            .search-history {
                 display: block;
             }
         }
