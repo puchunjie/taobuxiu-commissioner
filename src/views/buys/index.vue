@@ -8,7 +8,7 @@
       <div class="item" :class="{'active':statusActive == index}" v-for="(state,index) in status" :key="state.key" @click="screenStatus(index)">{{ `${state.value}(${state.count})` }}</div>
     </div>
     <scroller class="item-list" ref="scroller" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
-      <div class="item" v-for="(item,index) in list" :key="item.id" @click="$router.push('/buysDetail')">
+      <div class="item" v-for="(item,index) in list" :key="item.id" @click="$router.push('/buysDetail-'+item.id)">
         <div class="title">
           {{ item.companyName }}
           <span>{{ item.createTime | dateformat('MM/dd hh:mm') }}</span>
