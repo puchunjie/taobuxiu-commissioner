@@ -5,10 +5,10 @@
     </publicHead>
     <search v-model="apiData.userInfo" ref="search"></search>
     <div class="tab-bar-container">
-      <div class="item" :class="{'active':statusActive == index}" v-for="(state,index) in status" :key="state.key" @click="statusActive = index">{{ `${state.value}(${state.count})` }}</div>
+      <div class="item" :class="{'active':statusActive == index}" v-for="(state,index) in status" :key="state.key" @click="screenStatus(index)">{{ `${state.value}(${state.count})` }}</div>
     </div>
-    <scroller class="item-list" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
-      <div class="item" v-for="(item,index) in list" :key="item.id">
+    <scroller class="item-list" ref="scroller" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
+      <div class="item" v-for="(item,index) in list" :key="item.id" @click="$router.push('/buysDetail')">
         <div class="title">
           {{ item.companyName }}
           <span>{{ item.createTime | dateformat('MM/dd hh:mm') }}</span>
@@ -16,7 +16,10 @@
         <div class="content">
           <h3>{{ `${item.ironTypeName}/${item.surfaceName}/${item.materialName}/${item.proPlacesName}` }}</h3>
           <p>{{ item.specifications != '' ? item.specifications : `${item.height}*${item.length}*${item.width}` }} {{ item.tolerance != '' ? item.tolerance : ''}}</p>
-          <p>{{ item.numbers != '' ? item.numbers + item.numberUnit + ' ' : '' }}{{ item.weightUnit != '' ? item.weights + item.weightUnit : '' }}<span>{{ item.sellNum }}个报价</span></p>
+          <p>
+            {{ item.numbers != '' ? item.numbers + item.numberUnit + ' ' : '' }}{{ item.weightUnit != '' ? item.weights + item.weightUnit : '' }}
+            <span :class="'status-'+item.buyStatus">{{ item.sellNum }}个报价</span>
+          </p>
         </div>
       </div>
     </scroller>
@@ -28,6 +31,7 @@
   import publicHead from '@/components/header'
   import bottomTab from '@/components/bottomTab'
   import search from '@/components/search'
+  import debounce from 'lodash/debounce'
   export default {
     components: {
       bottomTab,
@@ -40,7 +44,7 @@
           userInfo: '',
           currentPage: 1,
           pageSize: 15,
-          buyStatus: 2 //1进行中，2成交，3失效
+          buyStatus: 1 //1进行中，2成交，3失效
         },
         status: [{
             key: 1,
@@ -60,7 +64,9 @@
         ],
         statusActive: 0,
         list: [],
-        totalCount: 0
+        totalCount: 0,
+        scrollTop: 0,
+        fromDetail: false //用来控制离开路由前，搜索值清空时不再出发获取数据
       }
     },
     computed: {
@@ -73,23 +79,22 @@
       }
     },
     methods: {
+      // 上拉刷新
       refresh(done) {
         this.apiData.currentPage = 1;
         this.getList().then(() => {
           done()
         })
       },
+      // 下拉加载
       infinite(done) {
         if (this.canPage) {
-          console.log(1)
           this.apiData.currentPage++;
           this.getList(false).then(() => {
             done()
           })
-        }else{
-          console.log(2)
+        } else {
           done(true)
-          // this.infinite = undefined
         }
       },
       // 显示搜索
@@ -111,17 +116,61 @@
             this.totalCount = res.data.totalCount;
           }
         })
-      }
-    },
-    watch: {
-      statusActive(val){
-        this.apiData.buyStatus = this.status[val].key;
+      },
+      // 切换状态
+      screenStatus(i){
+        this.statusActive = i;
+        this.apiData.buyStatus = this.status[this.statusActive].key;
+        this.reloadList();
+      },
+      // 刷新列表
+      reloadList() {
         this.apiData.currentPage = 1;
+        this.getList();
+        this.$refs.scroller.scrollTo(0, 0);
+      },
+      // 设置滚动条
+      setScroll(){
+        this.$nextTick(()=> {
+          setTimeout(() => {
+            this.$refs.scroller.scrollTo(0, this.scrollTop);
+          }, 500);
+        })
+      },
+      init(){
+        // 如果从详情回来，则不做初始化
+        if(this.fromDetail)
+          return false
+        this.statusActive = 0;
+        this.apiData.userInfo = '';
         this.getList();
       }
     },
-    created() {
-      this.getList();
+    watch: {
+      'apiData.userInfo': {
+        handler: debounce(function(val, oldVal) {
+          this.reloadList();
+        }, 500)
+      }
+    },
+    activated() {
+      this.init();
+    },
+    beforeRouteEnter(to, from, next) {
+      // 如果是从详情返回，则设置滚动到原来位置
+      next(vm => {
+        if (from.name == 'buysDetail') {
+          vm.setScroll();
+        }
+      })
+    },
+    beforeRouteLeave(to, from, next) {
+      // 如果是进入详情页，则保存滚动位置,如果是其他页面初始化所有数据
+      if (to.name == 'buysDetail') {
+        this.scrollTop = this.$refs.scroller.getPosition().top;
+      }
+      this.fromDetail = to.name == 'buysDetail';
+      next();
     }
   }
 </script>
@@ -169,6 +218,15 @@
             right: 0;
             font-size: 12px;
             color: @font_light;
+            &.status-1{
+
+            }
+            &.status-2{
+              
+            }
+            &.status-3{
+              
+            }
           }
         }
       }

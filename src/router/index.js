@@ -24,7 +24,18 @@ const router = new Router({
             },
             {
                 path: '/buys',
-                component: resolve => require(['@/views/buys/index.vue'], resolve)
+                component: resolve => require(['@/views/buys/index.vue'], resolve),
+                meta: {
+                    keepAlive: true
+                }
+            },
+            {
+                path: '/buysDetail-:ironBuyId',
+                name: 'buysDetail',
+                component: resolve => require(['@/views/buysDetail/index.vue'], resolve),
+                meta: {
+                    keepAlive: true
+                }
             },
             {
                 path: '*',
