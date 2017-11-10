@@ -34,20 +34,20 @@
 </script>
 
 <style lang="less" scoped>
-    @import '../../../assets/base.less';
+    @import '../../../style/mixin.less';
     .crown-container {
         position: relative;
         display: inline-block;
         vertical-align: top;
-        height: 16px;
+        height: .16rem;
         text-indent: 0!important;
         span {
             position: relative;
-            top: 2px;
+            top: .02rem;
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-right: 2px;
+            width: .16rem;
+            height: .16rem;
+            margin-right: .02rem;
             background-repeat: no-repeat;
             background-position: center;
             &.crown1 {
@@ -63,23 +63,23 @@
         .tip {
             position: absolute;
             display: none;
-            font-size: 12px;
-            line-height: 30px;
+            font-size: .12rem;
+            line-height: .3rem;
             text-align: center;
             color: #fff;
             text-indent: 0;
-            padding: 0 10px;
+            padding: 0 .1rem;
             background-color: rgba(70, 76, 91, .9);
             white-space: nowrap;
             z-index: 10;
             top: 0;
-            left: 20px;
+            left: .2rem;
             .borderRadius;
         }
         &.tip-left {
             .tip {
-                top: 9px;
-                right: 20px;
+                top: .09rem;
+                right: .2rem;
                 left: auto;
             }
         }

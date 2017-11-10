@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <a class="back">返回</a>
+        <a class="back" @click="$router.go('-1')">返回</a>
         <slot></slot>
         <a class="right">
             <slot name="right"></slot>
