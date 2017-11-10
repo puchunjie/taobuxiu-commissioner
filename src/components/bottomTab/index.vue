@@ -1,8 +1,8 @@
 <template>
     <div class="bottom-nav">
-        <router-link class="item" to="businessList"><span class="iconfont icon-zhuye"></span></router-link>
-        <router-link class="item" to="buys"><span class="iconfont icon-kehu"></span></router-link>
-        <router-link class="item" to="index"><span class="iconfont icon-iconfonticozhuce"></span></router-link>
+        <router-link class="item" to="businessList"><span class="iconfont icon-shouye"></span></router-link>
+        <router-link class="item" to="buys"><span class="iconfont icon-keyuanguanli"></span></router-link>
+        <router-link class="item" to="index"><span class="iconfont icon-gerenzhongxin"></span></router-link>
     </div>
 </template>
 
@@ -25,5 +25,9 @@
         .iconfont{
             font-size: .24rem;
         }
+    }
+
+    .router-link-active.item .iconfont{
+        color:@base_blue;
     }
 </style>

@@ -20,6 +20,8 @@
             {{ item.numbers != '' ? item.numbers + item.numberUnit + ' ' : '' }}{{ item.weightUnit != '' ? item.weights + item.weightUnit : '' }}
             <span :class="'status-'+item.buyStatus">{{ item.sellNum }}个报价</span>
           </p>
+
+          <span v-show="item.buyStatus == 3" class="dead iconfont icon-jiufuqianbaoicon10"></span>
         </div>
       </div>
     </scroller>
@@ -195,11 +197,12 @@
         span {
           position: absolute;
           right: .15rem;
-          font-size: 12px;
+          font-size: .12rem;
           color: @font_light;
         }
       }
       .content {
+        position: relative;
         width: 100%;
         padding: .1rem .15rem;
         font-size: .14rem;
@@ -216,18 +219,27 @@
           span {
             position: absolute;
             right: 0;
-            font-size: 12px;
-            color: @font_light;
+            font-size: .16rem;
+            
             &.status-1{
-
+              color: @status_green;
             }
             &.status-2{
-              
+              color: @status_red;
             }
             &.status-3{
-              
+              font-size: .12rem;
+              color: @font_light;
             }
           }
+        }
+
+        .dead{
+          position: absolute;
+          right: .15rem;
+          top: .2rem;
+          font-size: .6rem;
+          color: @font_light;
         }
       }
     }

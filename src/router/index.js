@@ -32,10 +32,7 @@ const router = new Router({
             {
                 path: '/buysDetail-:ironBuyId',
                 name: 'buysDetail',
-                component: resolve => require(['@/views/buysDetail/index.vue'], resolve),
-                meta: {
-                    keepAlive: true
-                }
+                component: resolve => require(['@/views/buysDetail/index.vue'], resolve)
             },
             {
                 path: '*',

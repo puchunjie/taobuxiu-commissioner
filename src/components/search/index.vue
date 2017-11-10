@@ -139,7 +139,7 @@
             border-bottom: 1px solid @line_light_gray;
             text-indent: .1rem;
             line-height: .4rem;
-            font-size: 14px;
+            font-size: .14rem;
             font-weight: 500;
         }
         .history-list {
