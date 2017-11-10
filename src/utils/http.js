@@ -2,29 +2,29 @@ import axios from 'axios'
 import router from '@/router'
 import Qs from 'qs'
 import { baseUrl } from './evn'
-// import store from './store/store'
-// import * as types from './store/types'
+import store from '@/store/store'
+import * as types from '@/store/types'
 
 // axios 配置
 // axios.defaults.timeout = 20000;
 axios.defaults.baseURL = baseUrl;
 // axios.defaults.baseURL = 'http://120.55.63.70'; //配置接口地址
-// axios.defaults.baseURL = 'http://192.168.0.132:8080'; //配置接口地址
+axios.defaults.baseURL = 'http://192.168.0.132:8080'; //配置接口地址
 // axios.defaults.baseURL = 'http://192.168.0.122:8080'; //配置接口地址
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
 axios.defaults.withCredentials = true;
 
 // 获取用户token
-// let loginId = store.state.loginId;
-// let authorization = store.state.authorization;
+let loginId = store.state.loginId;
+let authorization = store.state.authorization;
 
 // http request 拦截器
 axios.interceptors.request.use(config => {
     // LoadingBar.start();
-    // if (store.state.authorization || store.state.authorization != null) {
-    //     config.headers.common['authorization'] = store.state.authorization;
-    //     config.headers.common['loginId'] = store.state.loginId;
-    // }
+    if (store.state.authorization || store.state.authorization != null) {
+        config.headers.common['authorization'] = store.state.authorization;
+        config.headers.common['loginId'] = store.state.loginId;
+    }
     config.data = Qs.stringify(config.data);
     return config;
 }, err => {
@@ -33,7 +33,7 @@ axios.interceptors.request.use(config => {
 
 // http response 拦截器
 axios.interceptors.response.use(response => {
-    LoadingBar.finish();
+    // LoadingBar.finish();
     if (response.data.code === 403) {
         if (router.currentRoute.name != 'index') {
             // Modal.confirm({
@@ -121,10 +121,10 @@ axios.interceptors.response.use(response => {
                 error.message = '服务器线路异常'
         }
     }
-    Notice.error({
-        title: error.message,
-        desc: '网络或服务器正消极罢工，请刷新重试或联系客服人员报备解决，谢谢！'
-    })
+    // Notice.error({
+    //     title: error.message,
+    //     desc: '网络或服务器正消极罢工，请刷新重试或联系客服人员报备解决，谢谢！'
+    // })
     return Promise.reject(error)
 });
 

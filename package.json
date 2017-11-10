@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "dateformat-util": "^1.0.5",
     "fastclick": "^1.0.6",
     "vue": "^2.5.2",
+    "vue-ls": "^2.3.3",
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
     "vuex": "^3.0.1"

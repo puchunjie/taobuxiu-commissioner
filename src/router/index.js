@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { routerMode } from '@/utils/evn'
-// import store from '@/store/store'
-// import * as types from '@/store/types'
+import store from '@/store/store'
+import * as types from '@/store/types'
 
 Vue.use(Router);
 
 // 页面刷新时，重新赋值token
-// if (Vue.ls.get('authorization')) {
-//     store.commit(types.LOGIN, { authorization: Vue.ls.get('authorization'), loginId: Vue.ls.get('loginId') })
-// }
+if (Vue.ls.get('authorization_zy')) {
+    store.commit(types.LOGIN, { authorization: Vue.ls.get('authorization_zy'), loginId: Vue.ls.get('loginId_zy') })
+}
 const router = new Router({
         mode: routerMode,
         base: '/zy/',
