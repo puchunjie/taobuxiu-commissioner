@@ -5,7 +5,6 @@ import store from '@/store/store'
 import * as types from '@/store/types'
 
 Vue.use(Router);
-
 // 页面刷新时，重新赋值token
 if (Vue.ls.get('authorization_zy')) {
     store.commit(types.LOGIN, { authorization: Vue.ls.get('authorization_zy'), loginId: Vue.ls.get('loginId_zy') })

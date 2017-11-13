@@ -32,6 +32,14 @@
       </div>
     </div>
     <div class="offer-list">
+      <div class="contnet bt" v-if="ironBuy.buyStatus == 2">
+        <div class="item done">
+          <p><span class="price">成交价：{{ validSell[0].offerPerPrice }}元/{{ validSell[0].baseUnit }}</span></p>
+          <p class="remark">公差：{{ validSell[0].tolerance | emptyHlod('-') }}&nbsp;&nbsp;&nbsp;&nbsp;产地：{{ validSell[0].offerPlaces }}</p>
+          <p class="remark">备注：{{ validSell[0].offerRemark }}</p>
+          <Company :company="validSell[0]"></Company>
+        </div>
+      </div>
       <p class="head">报价列表</p>
       <div class="contnet" v-for="(item,index) in validSell" :key="index">
         <div class="item">
@@ -39,6 +47,7 @@
           <p class="remark">备注：{{ item.offerRemark }}</p>
           <Company :company="item"></Company>
         </div>
+        <span class="success iconfont icon-ziyuan1" v-if="ironBuy.buyStatus == 2 && index == 0"></span>
       </div>
       <div class="contnet" v-for="(item,index) in missSell" :key="index">
         <div class="item">
@@ -47,6 +56,7 @@
         </div>
       </div>
     </div>
+    <p style="text-align:center" v-show="vaild == 0 && miss == 0">暂无报价</p>
   </div>
 </template>
 
@@ -196,7 +206,7 @@
       h3 {
         width: 2.8rem;
         font-size: .14rem;
-        font-weight: 500;
+        font-weight: bold;
         .ellipsis;
       }
       p {
@@ -229,7 +239,7 @@
 
   .offer-list{
     width: 100%;
-    margin: .08rem 0 .1rem 0;
+    margin: .08rem 0 .3rem 0;
     background-color: #fff;
     .head{
       width: 100%;
@@ -237,10 +247,11 @@
       line-height: .4rem;
       text-align: center;
       font-size: .16rem;
-      font-weight: 500;
+      font-weight: bold;
       border-bottom: 1px solid @line_light_gray;
     }
     .contnet{
+      position: relative;
       width: 100%;
       padding: .15rem;
       border-bottom: 1px solid @line_light_gray;
@@ -251,7 +262,7 @@
         }
         .price{
           color:@status_red;
-          font-weight: 500;
+          font-weight: bold;
         }
         span{
           margin-right: .1rem;
@@ -259,10 +270,28 @@
         .remark{
           color:@font_light;
         }
-      }
 
+        &.done{
+          .price{
+            font-size: .24rem;
+          }
+        }
+      }
+      
       &:last-child{
         border: 0;
+      }
+
+      &.bt{
+        border-bottom: .08rem solid @background_gray;
+      }
+
+      .success{
+        position: absolute;
+        right: 0;
+        top: -.03rem;
+        font-size: .42rem;
+        color: @status_red;
       }
     }
   }

@@ -210,7 +210,7 @@
         h3 {
           width: 2.8rem;
           font-size: .14rem;
-          font-weight: 500;
+          font-weight: bold;
           .ellipsis;
         }
         p {
@@ -266,7 +266,7 @@
       }
       &.active {
         color: @base_blue;
-        font-weight: 500;
+        font-weight: bold;
       }
     }
   }

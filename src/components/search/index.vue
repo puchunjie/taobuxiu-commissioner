@@ -140,7 +140,7 @@
             text-indent: .1rem;
             line-height: .4rem;
             font-size: .14rem;
-            font-weight: 500;
+            font-weight: bold;
         }
         .history-list {
             width: 100%;
