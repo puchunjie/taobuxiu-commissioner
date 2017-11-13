@@ -1,8 +1,7 @@
 <template>
   <div class="container">
-    <publicHead>标题</publicHead>
+    <publicHead>商家列表</publicHead>
     <div class="mid-container">
-      <!-- <search v-model="text"></search> -->
       <search v-model="apiData.queryMessage" ref="search"></search>
       <div class="item-list">
         <scroller ref="scroller" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
@@ -147,10 +146,10 @@ export default {
 .mid-container {
   width: 100%;
   height: 100%;
-  padding: 0.4rem 0 0.5rem 0;
+  padding: 0.46rem 0 0.5rem 0;
   .item-list {
     position: relative;
-    height: calc(~"100% - .4rem");
+    height: calc(~"100% - .46rem");
     p {
       line-height: 0.3rem;
     }
