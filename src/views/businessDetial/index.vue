@@ -7,8 +7,11 @@
         <li class="column">
           <div class="column-left">资质认证</div>
           <div class="column-right">
-            <span v-show="list.isFaithUser == '1'" class="iconfont icon-chengxin"></span>
-            <span v-show="list.isGuaranteeUser == '1'" class="iconfont icon-bao"></span>
+            <template v-if="list.isFaithUser == '1' || list.isGuaranteeUser == '1'">
+              <span class="iconfont icon-chengxin"></span>
+              <span class="iconfont icon-bao"></span>
+            </template>
+            <span v-else>暂无</span>
           </div>
         </li>
         <li class="column"><div class="column-left">注册手机</div><div class="column-right">{{tel}}</div></li>

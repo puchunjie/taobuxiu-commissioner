@@ -43,7 +43,8 @@ export default {
         pageSize: 10,
         queryMessage: ""
       },
-      maxCount: 0
+      maxCount: 0,
+      fromDetail: false
     };
   },
   computed: {
@@ -92,7 +93,16 @@ export default {
           this.$refs.scroller.scrollTo(0, this.scrollTop);
         }, 500);
       })
+    },
+    init() {
+       // 如果从详情回来，则不做初始化
+      if(this.fromDetail)
+        return false
+      this.getList();
     }
+  },
+  activated () {
+    this.init();
   },
   beforeRouteEnter(to, from, next) {
     // 如果是从详情返回，则设置滚动到原来位置
@@ -107,6 +117,7 @@ export default {
     if (to.name == 'businessDetial') {
       this.scrollTop = this.$refs.scroller.getPosition().top;
     }
+    this.fromDetail = to.name == 'businessDetial';
     next();
   },
   created() {
