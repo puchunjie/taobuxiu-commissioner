@@ -2,7 +2,8 @@
   <div class="container">
     <publicHead>标题</publicHead>
     <div class="mid-container">
-      <search v-model="text"></search>
+      <!-- <search v-model="text"></search> -->
+      <search v-model="apiData.queryMessage" ref="search"></search>
       <div class="item-list">
         <scroller ref="scroller" :on-refresh="refresh" :on-infinite="infinite" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
           <div class="list-column">
@@ -28,6 +29,7 @@
 import publicHead from "@/components/header";
 import bottomTab from "@/components/bottomTab";
 import search from "@/components/search";
+import debounce from 'lodash/debounce'
 export default {
   components: {
     bottomTab,
@@ -44,6 +46,7 @@ export default {
         queryMessage: ""
       },
       maxCount: 0,
+      scrollTop: 0,
       fromDetail: false
     };
   },
@@ -99,8 +102,21 @@ export default {
       if(this.fromDetail)
         return false
       this.getList();
-    }
+    },
+    // 刷新列表
+      reloadList() {
+        this.apiData.currentPage = 1;
+        this.getList();
+        this.$refs.scroller.scrollTo(0, 0);
+      }
   },
+    watch: {
+      'apiData.queryMessage': {
+        handler: debounce(function(val, oldVal) {
+          this.reloadList();
+        }, 500)
+      }
+    },
   activated () {
     this.init();
   },

@@ -22,7 +22,8 @@ const router = new Router({
         },
         {
             path: '/businessDetial-:id',
-            component: resolve => require(['@/views/businessDetial/index.vue'], resolve)
+            component: resolve => require(['@/views/businessDetial/index.vue'], resolve),
+            name: 'businessDetial'
         },
         {
             path: '/buys',
