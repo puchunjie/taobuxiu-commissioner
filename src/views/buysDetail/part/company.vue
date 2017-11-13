@@ -2,8 +2,8 @@
     <div class="company-warp">
         <h3>
             {{ company.companyName }}
-            <span class="iconfont icon-cheng"></span>
-            <span class="iconfont icon-bao"></span>
+            <span class="iconfont icon-cheng" v-show="company.isFaithUser == 1"></span>
+            <span class="iconfont icon-bao" v-show="company.isGuaranteeUser == 1"></span>
             <crown style="margin-left:.05rem" :level="company.level"></crown>
         </h3>
         <p><span class="iconfont icon-hui"></span>{{ company.proInfo | emptyHlod('暂无') }}</p>

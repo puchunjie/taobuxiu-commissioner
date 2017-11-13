@@ -8,8 +8,8 @@
           <div class="column-left">资质认证</div>
           <div class="column-right">
             <template v-if="list.isFaithUser == '1' || list.isGuaranteeUser == '1'">
-              <span class="iconfont icon-chengxin"></span>
-              <span class="iconfont icon-bao"></span>
+              <span class="iconfont icon-cheng" v-show="list.isFaithUser == '1'"></span>
+              <span class="iconfont icon-bao" v-show="list.isGuaranteeUser == '1'"></span>
             </template>
             <span v-else>暂无</span>
           </div>
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     getBusinessDetail(){
-      this.$http.get('sys/salesManBuserInfo/findBuserInfo',{
+      this.$http.get('/sys/salesManBuserInfo/findBuserInfo',{
         params:{
           userId: this.id
         }
@@ -108,7 +108,7 @@ export default {
         color: #333;
         .iconfont{
           font-size: .16rem;
-          &.icon-chengxin{
+          &.icon-cheng{
             color: #f5a623;
           }
           &.icon-bao{

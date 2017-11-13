@@ -73,7 +73,7 @@ export default {
     },
     //  获取列表
     getList() {
-      this.$http.get("sys/salesManBuserInfo/findBuserInfoPage",{
+      this.$http.get("/sys/salesManBuserInfo/findBuserInfoPage",{
             params: this.apiData
           }
         ).then(res => {

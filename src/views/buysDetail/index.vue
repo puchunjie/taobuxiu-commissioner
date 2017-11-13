@@ -196,6 +196,11 @@
         font-size: .12rem;
         color: @font_light;
       }
+
+      a{
+        color:@font_dark;
+      }
+      
     }
     .content {
       position: relative;

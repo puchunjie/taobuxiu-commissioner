@@ -4,6 +4,7 @@ import Qs from 'qs'
 import { baseUrl } from './evn'
 import store from '@/store/store'
 import * as types from '@/store/types'
+import { Toast, MessageBox } from 'mint-ui'
 
 // axios 配置
 // axios.defaults.timeout = 20000;
@@ -35,37 +36,22 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     // LoadingBar.finish();
     if (response.data.code === 403) {
-        // Modal.confirm({
-        //     content: '登录过期，请重新登录。',
-        //     onOk() {
-        //         //清除token信息并跳转到登录页面
-        //         store.commit(types.LOGOUT);
-        //         router.replace({
-        //             path: '/login',
-        //             query: { redirect: router.currentRoute.fullPath }
-        //         })
-        //     },
-        //     onCancel() {
-        //         router.replace({
-        //             path: '/'
-        //         })
-        //     }
-        // })
-
+        MessageBox.alert('登录过期，请重新登录!').then(action => {
+            //清除token信息并跳转到登录页面
+            store.commit(types.LOGOUT);
+            router.replace({
+                path: '/login',
+                query: { redirect: router.currentRoute.fullPath }
+            })
+        });
     } else if (response.data.code === 1002) {
-        // Modal.confirm({
-        //     content: '操作权限不够，请充值！',
-        //     onOk() {
-        //         router.replace({
-        //             path: '/'
-        //         })
-        //     },
-        //     onCancel() {
-        //         router.replace({
-        //             path: '/'
-        //         })
-        //     }
-        // })
+        MessageBox.alert('操作权限不够，请更换账号!').then(action => {
+            //清除token信息并跳转到登录页面
+            router.replace({
+                path: '/login',
+                query: { redirect: router.currentRoute.fullPath }
+            })
+        });
     }
     return response.data;
 }, error => {
@@ -119,10 +105,7 @@ axios.interceptors.response.use(response => {
                 error.message = '服务器线路异常'
         }
     }
-    // Notice.error({
-    //     title: error.message,
-    //     desc: '网络或服务器正消极罢工，请刷新重试或联系客服人员报备解决，谢谢！'
-    // })
+    Toast(error.message)
     return Promise.reject(error)
 });
 

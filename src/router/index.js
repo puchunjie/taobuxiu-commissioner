@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import { routerMode } from '@/utils/evn'
 import store from '@/store/store'
 import * as types from '@/store/types'
-
+import { MessageBox } from 'mint-ui'
 Vue.use(Router);
 // 页面刷新时，重新赋值token
 if (Vue.ls.get('authorization_zy')) {
@@ -40,7 +40,10 @@ const router = new Router({
         {
             path: '/login',
             name: 'login',
-            component: resolve => require(['@/views/login/index.vue'], resolve)
+            component: resolve => require(['@/views/login/index.vue'], resolve),
+            meta: {
+                requireAuth: true
+            }
         },
         {
             path: '*',
@@ -66,8 +69,11 @@ router.beforeEach((to, from, next) => {
         if (store.state.authorization) {
             next();
         } else {
-            alert("请登录！");
-            router.push("/login")
+            MessageBox.alert('请登录!').then(action => {
+                next({
+                    path: '/login'
+                })
+            });
         }
     }
 })
