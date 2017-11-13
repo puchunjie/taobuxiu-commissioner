@@ -35,24 +35,22 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     // LoadingBar.finish();
     if (response.data.code === 403) {
-        if (router.currentRoute.name != 'index') {
-            // Modal.confirm({
-            //     content: '登录过期，请重新登录。',
-            //     onOk() {
-            //         //清除token信息并跳转到登录页面
-            //         store.commit(types.LOGOUT);
-            //         router.replace({
-            //             path: '/login',
-            //             query: { redirect: router.currentRoute.fullPath }
-            //         })
-            //     },
-            //     onCancel() {
-            //         router.replace({
-            //             path: '/'
-            //         })
-            //     }
-            // })
-        }
+        // Modal.confirm({
+        //     content: '登录过期，请重新登录。',
+        //     onOk() {
+        //         //清除token信息并跳转到登录页面
+        //         store.commit(types.LOGOUT);
+        //         router.replace({
+        //             path: '/login',
+        //             query: { redirect: router.currentRoute.fullPath }
+        //         })
+        //     },
+        //     onCancel() {
+        //         router.replace({
+        //             path: '/'
+        //         })
+        //     }
+        // })
 
     } else if (response.data.code === 1002) {
         // Modal.confirm({

@@ -14,7 +14,7 @@
     </div>
     <div class="iron-item">
       <div class="title">
-        <router-link to="businessDetial">{{ company.companyName }}<span class="iconfont icon-arrow-right"></span></router-link>
+        <router-link :to="'businessDetial-'+company.userId">{{ company.companyName }}<span class="iconfont icon-arrow-right"></span></router-link>
         <span class="date">{{ ironBuy.createTime | dateformat('MM/dd hh:mm') }}</span>
       </div>
       <div class="content">
