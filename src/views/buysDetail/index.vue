@@ -19,7 +19,7 @@
       </div>
       <div class="content">
         <h3>{{ `${ironBuy.ironTypeName}/${ironBuy.surfaceName}/${ironBuy.materialName}/${ironBuy.proPlacesName}` }}</h3>
-        <p>{{ ironBuy.specifications != '' ? ironBuy.specifications : `${ironBuy.height}*${ironBuy.length}*${ironBuy.width}` }} {{ ironBuy.tolerance != '' ? ironBuy.tolerance : ''}}</p>
+        <p>{{ ironBuy.specifications != '' ? ironBuy.specifications : `${ironBuy.height}*${ironBuy.width}*${ironBuy.length}` }} {{ ironBuy.tolerance != '' ? ironBuy.tolerance : ''}}</p>
         <p>
           {{ ironBuy.numbers != '' ? ironBuy.numbers + ironBuy.numberUnit + ' ' : '' }}{{ ironBuy.weightUnit != '' ? ironBuy.weights + ironBuy.weightUnit : '' }}
         </p>

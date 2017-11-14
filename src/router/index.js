@@ -7,7 +7,11 @@ import { MessageBox } from 'mint-ui'
 Vue.use(Router);
 // 页面刷新时，重新赋值token
 if (Vue.ls.get('authorization_zy')) {
-    store.commit(types.LOGIN, { authorization: Vue.ls.get('authorization_zy'), loginId: Vue.ls.get('loginId_zy') })
+    store.commit(types.LOGIN, {
+        authorization: Vue.ls.get('authorization_zy'),
+        loginId: Vue.ls.get('loginId_zy'),
+        user: Vue.ls.get('user_zy')
+    })
 }
 const router = new Router({
     mode: routerMode,
@@ -36,6 +40,11 @@ const router = new Router({
             path: '/buysDetail-:ironBuyId',
             name: 'buysDetail',
             component: resolve => require(['@/views/buysDetail/index.vue'], resolve)
+        },
+        {
+            path: '/user',
+            name: 'user',
+            component: resolve => require(['@/views/user/index.vue'], resolve)
         },
         {
             path: '/login',

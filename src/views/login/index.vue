@@ -49,10 +49,7 @@
         if (this.valid) {
           this.$http.post('/login/userLogin', this.loginData).then(res => {
             if (res.code === 1000) {
-              this.setUser({
-                authorization: res.data.authorization,
-                loginId: res.data.loginId
-              });
+              this.setUser(res.data);
               this.$Toast({
                 message: '登录成功',
                 duration: 2000

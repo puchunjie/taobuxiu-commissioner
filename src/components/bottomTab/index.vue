@@ -1,10 +1,35 @@
 <template>
     <div class="bottom-nav">
-        <router-link class="item" to="businessList"><span class="iconfont icon-shouye"></span></router-link>
-        <router-link class="item" to="buys"><span class="iconfont icon-keyuanguanli"></span></router-link>
-        <!-- <router-link class="item" to="index"><span class="iconfont icon-gerenzhongxin"></span></router-link> -->
+        <router-link class="item" :to="item.link" v-for="(item,index) in nav" :key="index">
+            <span class="iconfont" :class="item.icon"></span>
+        </router-link>
     </div>
 </template>
+
+<script>
+export default {
+  data () {
+      return {
+          nav:[{
+              name:'首页',
+              icon:'icon-shouye',
+              link:'businessList'
+          },
+          {
+              name:'求购列表',
+              icon:'icon-keyuanguanli',
+              link:'buys'
+          },
+          {
+              name:'用户中心',
+              icon:'icon-gerenzhongxin',
+              link:'user'
+          }]
+      }
+  }
+}
+</script>
+
 
 <style lang="less" scoped>
     @import '../../style/mixin.less';
