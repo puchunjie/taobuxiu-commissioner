@@ -2,7 +2,7 @@
     <div class="container">
         <publicHead>专员信息</publicHead>
         <div class="mid-container">
-            <div class="head-logo"></div>
+            <div class="head-logo" :class="dogClass"></div>
             <p>{{ user.realName }}</p>
             <a class="btn" @click="logout">退出登录</a>
         </div>
@@ -22,14 +22,25 @@
             publicHead,
             bottomTab
         },
+        data() {
+            return {
+                num: 5
+            }
+        },
         computed: {
-            ...mapGetters(['user'])
+            ...mapGetters(['user']),
+            dogClass() {
+                return 'dog' + this.num
+            }
         },
         methods: {
             logout() {
                 this.$store.commit(types.LOGOUT);
                 window.location.href = '/zy/login';
             }
+        },
+        created() {
+            this.num = Math.floor(Math.random() * 6 + 1);
         }
     }
 </script>
@@ -45,10 +56,27 @@
             height: 1.6rem;
             .borderRadius(.8rem);
             margin: .5rem auto .2rem;
-            background-image: url('../../assets/logo.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
+        }
+        .dog1 {
+            background-image: url(../../assets/logo1.jpg);
+        }
+        .dog2 {
+            background-image: url(../../assets/logo2.jpg);
+        }
+        .dog3 {
+            background-image: url(../../assets/logo3.jpg);
+        }
+        .dog4 {
+            background-image: url(../../assets/logo4.jpg);
+        }
+        .dog5 {
+            background-image: url(../../assets/logo5.jpg);
+        }
+        .dog6 {
+            background-image: url(../../assets/logo6.jpg);
         }
         p {
             text-align: center;
