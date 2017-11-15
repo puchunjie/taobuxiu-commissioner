@@ -15,7 +15,7 @@
         </div>
         <div class="content">
           <h3>{{ `${item.ironTypeName}/${item.surfaceName}/${item.materialName}/${item.proPlacesName}` }}</h3>
-          <p>{{ item.specifications != '' ? item.specifications : `${item.height}*${item.length}*${item.width}` }} {{ item.tolerance != '' ? item.tolerance : ''}}</p>
+          <p>{{ item.specifications != '' ? item.specifications : `${item.height}*${item.width}*${item.length}` }} {{ item.tolerance != '' ? item.tolerance : ''}}</p>
           <p>
             {{ item.numbers != '' ? item.numbers + item.numberUnit + ' ' : '' }}{{ item.weightUnit != '' ? item.weights + item.weightUnit : '' }}
             <span :class="'status-'+item.buyStatus">{{ item.sellNum }}个报价</span>
